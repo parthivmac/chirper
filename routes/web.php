@@ -3,9 +3,12 @@
 use App\Http\Controllers\ChirpController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Chirp;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',[
+        'chirps' => Chirp::with('user')->latest()->get(),
+    ]);
 });
 
 Route::get('/dashboard', function () {
